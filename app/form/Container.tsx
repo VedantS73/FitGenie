@@ -11,20 +11,12 @@ import { useRouter } from "next/navigation";
 import useFormOneStore from "@/store/formStore";
 // import mailSender from "../../pages/api/emailsend";
 import { marked } from 'marked';
-// import { Client, Databases, ID } from "appwrite";
+import { Client, Databases, ID } from "appwrite";
 
-// const client = new Client()
-//     .setEndpoint('https://cloud.appwrite.io/v1')
-//     .setProject(`${process.env.APPWRITE_PROJECT_ID!}`);
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1')
+    .setProject(`65fdbf643f997e6ea8f1`);
 
-// const databases = new Databases(client);
-
-// const promise = databases.createDocument(
-//   '<DATABASE_ID>',
-//   '<COLLECTION_ID>',
-//   ID.unique(),
-//   { "title": "Hamlet" }
-// );
 
 const Container = () => {
   const forms = [
@@ -89,18 +81,7 @@ const Container = () => {
 
     console.log("the reponse of promts is => ", prompt);
 
-    // const promise = databases.createDocument(
-    //   `${process.env.APPWRITE_DATABASE_ID}`,
-    //   '65feae246cd725f25e0d',
-    //   ID.unique(),
-    //   { "planstring": `${results}` }
-    // )
-
-    // promise.then(function (response) {
-    //   console.log(response);
-    // }, function (error) {
-    //     console.log(error);
-    // });
+    
 
     console.log(results);
 
@@ -110,6 +91,9 @@ const Container = () => {
     const email = "vedantsawant72003@gmail.com"
     const subject = "Your FitGennie AI Fitness Plan"
     const title = newnewres;
+
+
+
     const sendmail = await fetch("/api/emailsend", {
       method: "POST",
       body: JSON.stringify({
