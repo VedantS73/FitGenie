@@ -78,31 +78,7 @@ const page: React.FC = () => {
               </h2>
             </div>
           </div>
-          <div className="plans-section mt-32 font-product flex flex-col justify-center items-center">
-            <h2 className="mt-2 text-6xl text-violet-500 font-bold tracking-tight max-sm:tracking-tighter max-sm:text-5xl">
-              Track Progress
-            </h2>
-            <Image
-              className=" border border-violet-500 shadow-md mt-24 rounded-md  scale-125 max-sm:hidden"
-              src={GraphSvg}
-              alt={""}
-            ></Image>
-            <div className="w-[80ch] text-left text-base text-violet-700 font-medium md:mx-auto py-16 max-sm:w-[30ch] max-sm:text-center">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Laboriosam soluta doloremque amet corporis fugit unde, possimus
-              laudantium similique delectus nostrum rem blanditiis error
-              mollitia praesentium, asperiores odit deserunt! Voluptatum
-              officiis, dolores repudiandae voluptates, libero vel nulla dolor
-              soluta officia laboriosam nemo similique, aliquid facere quod
-              fugiat minima deleniti eius quidem iste maiores vitae amet! Quis
-              officia, doloribus perferendis asperiores velit officiis ratione
-              illum est excepturi recusandae, autem molestiae aliquam. Ut, odit
-              aperiam! Quas ea aut deserunt sint, consequatur magnam praesentium
-              id, ipsa modi consectetur, atque velit porro et quia? Cumque
-              officiis iste sit ullam, non minus aliquid. Veritatis, deleniti
-              atque?
-            </div>
-          </div>
+          
           <div className="plans-section bg-violet-500 mt-24 py-24 font-product flex flex-col justify-center items-center">
             <h2 className="mt-2 text-6xl text-white font-bold  tracking-tight">
               Saved Plans
@@ -115,17 +91,12 @@ const page: React.FC = () => {
           <div className="font-product flex flex-row  py-12 items-center border-2 justify-center md:container md:mx-auto mt-12 max-sm:flex-col">
             <div className="justify-self-center w-auto font-product font-medium">
               <button className=" px-4 py-3 font-semibold rounded-md  bg-violet-600 text-white mx-8 mt-7 hover:scale-105 transition-all">
-                Regenerate💫
-              </button>
-            </div>
-            <div className="justigy-self-start w-auto font-product font-medium">
-              <button className="rounded-md px-5 py-3 font-semibold  bg-violet-600 text-white mx-8 mt-7 hover:border hover:border-black  hover:scale-105 transition-all">
-                Add your Diet🤩
+                Save Diet🚀
               </button>
             </div>
             <div className="justify-self-center w-auto font-product font-medium">
               <button className="bg-lime-600 shadow-sm text-white px-4 py-3 font-semibold rounded-md mx-8 mt-7 hover:scale-105 transition-all">
-                Share Profile🚀
+                Regenerate Diet🚀
               </button>
             </div>
           </div>

@@ -10,6 +10,20 @@ import "react-circular-progressbar/dist/styles.css";
 import { useRouter } from "next/navigation";
 import useFormOneStore from "@/store/formStore";
 import { marked } from 'marked';
+// import { Client, Databases, ID } from "appwrite";
+
+// const client = new Client()
+//     .setEndpoint('https://cloud.appwrite.io/v1')
+//     .setProject(`${process.env.APPWRITE_PROJECT_ID!}`);
+
+// const databases = new Databases(client);
+
+// const promise = databases.createDocument(
+//   '<DATABASE_ID>',
+//   '<COLLECTION_ID>',
+//   ID.unique(),
+//   { "title": "Hamlet" }
+// );
 
 const Container = () => {
   const forms = [
@@ -73,6 +87,20 @@ const Container = () => {
     }).then((res) => res.json());
 
     console.log("the reponse of promts is => ", prompt);
+
+    // const promise = databases.createDocument(
+    //   `${process.env.APPWRITE_DATABASE_ID}`,
+    //   '65feae246cd725f25e0d',
+    //   ID.unique(),
+    //   { "planstring": `${results}` }
+    // )
+
+    // promise.then(function (response) {
+    //   console.log(response);
+    // }, function (error) {
+    //     console.log(error);
+    // });
+
     console.log(results);
     let newres = marked.parse(results);
     let newnewres = newres.replace(/\n{2,}/g, '\n');
