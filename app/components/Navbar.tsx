@@ -70,6 +70,12 @@ const Navbar: FC<NavbarProps> = ({}) => {
           </button>
         </Link>
 
+        <Link href="/workout">
+          <button id="trainer-button">
+            My Workout
+          </button>
+        </Link>
+
         <Link href="/plans">
           <button id="trainer-button">
             My Plans
