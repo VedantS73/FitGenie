@@ -12,10 +12,10 @@ import useFormOneStore from "@/store/formStore";
 
 const Container = () => {
   const forms = [
-    <StepFormOne />,
-    <StepFormTwo />,
-    <StepFormThree />,
-    <StepFormFour />,
+    <StepFormOne key="stepFormOne" />,
+    <StepFormTwo key="stepFormTwo" />,
+    <StepFormThree key="stepFormThree" />,
+    <StepFormFour key="stepFormFour" />,
   ];
 
   // navigating to the next stepform

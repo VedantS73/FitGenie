@@ -38,7 +38,7 @@ const Hero = () => {
         <span className="font-extrabold">Transform your</span>
         <span className="font-extrabold">
           fitness journey with{" "}
-          <span className="text-violet-500 font-extrabold">FitAI.</span>
+          <span className="text-violet-500 font-extrabold">Fit Genie.</span>
         </span>
         <p className="mt-4 text-lg w-[551px] font-semibold mx-auto leading-8 text-gray-600 sm:text-center max-sm:w-[340px]">
           Customized workout and diet plans, powered by AI. Say goodbye to

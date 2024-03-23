@@ -2,7 +2,7 @@
 import Link from "next/link";
 import type { FC } from "react";
 import { useState, useEffect } from "react";
-import fitAIimg from "@/public/images/flexed-biceps_fitAI.png";
+import fg_logo from "@/public/images/fg_logo.png";
 import Image from "next/image";
 import { account } from "@/pages/api/appwriteConfig";
 import { useRouter, usePathname } from "next/navigation";
@@ -58,9 +58,9 @@ const Navbar: FC<NavbarProps> = ({}) => {
     >
       <div className="text-4xl font-semibold flex flex-row justify-center items-center gap-1 text-violet-600
        max-sm:mx-auto">
-        <Image className="w-10 h-10" src={fitAIimg} alt={""} />
+        <Image className="w-20 h-10" src={fg_logo} alt={""} />
         <a href="/">
-          <span> fitai. </span>
+          <span> Fit Genie </span>
         </a>
       </div>
       <div className="flex justify-center items-center gap-10 font-medium text-violet-600 text-lg max-sm:hidden">
