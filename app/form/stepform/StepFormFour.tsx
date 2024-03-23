@@ -165,7 +165,7 @@ const StepForm4 = () => {
           </div>
 
           <div>
-            <h1 className="text-3xl mt-8 font-bold">What's your budget?</h1>
+            <h1 className="text-3xl mt-8 font-bold">What is your budget?</h1>
             <FormControl fullWidth sx={{ m: 1 }} variant="standard">
               <InputLabel htmlFor="standard-adornment-amount">
                 Amount
@@ -205,10 +205,8 @@ const StepForm4 = () => {
               </button>
             </ButtonGroup>
           </div>
-        </div>
-      )}
 
-      <div className="mt-10 flex justify-center max-sm:-mt-10 max-sm:pb-10">
+          <div className="mt-10 flex justify-center max-sm:-mt-10 max-sm:pb-10">
         <FormControl sx={{ minWidth: "200px" }}>
           <InputLabel id="demo-simple-select-label">Time Duration</InputLabel>
           <Select
@@ -225,6 +223,8 @@ const StepForm4 = () => {
           </Select>
         </FormControl>
       </div>
+        </div>
+      )}
     </div>
   );
 };

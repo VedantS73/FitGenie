@@ -48,69 +48,139 @@ const Container = () => {
   // sends a POST request to a openAI server with a prompt and store the result in answer state
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    state.setLoading(true);
-    route.push("/plans");
-    state.setAnswer("");
-    if (state.weight === "") {
-      alert("no data");
-      return;
+    if (state.selectedPlan === "exercise") {
+      route.push("/workout");
+      let customPlan = {
+        "workout_plan": {
+          "day_1": {
+            "sit-up": 20,
+            "pull-up": 3,  
+            "push-up": 15,
+            "squat": 30,
+            "walk": {
+              "duration": "30 minutes",
+              "steps": 4000
+            }
+          },
+          "day_2": {
+            "sit-up": 25,
+            "pull-up": 3,
+            "push-up": 20,
+            "squat": 35,
+            "walk": {
+              "duration": "30 minutes",
+              "steps": 4000
+            }
+          },
+          "day_3": {
+            "sit-up": 25,
+            "pull-up": 3,
+            "push-up": 20,
+            "squat": 35,
+            "walk": {
+              "duration": "30 minutes",
+              "steps": 4000
+            }
+          },
+          "day_4": {
+            "sit-up": 30,
+            "pull-up": 4,
+            "push-up": 25,
+            "squat": 40,
+            "walk": {
+              "duration": "40 minutes",
+              "steps": 5000
+            }
+          },
+          "day_5": {
+            "sit-up": 30,
+            "pull-up": 4,
+            "push-up": 25,
+            "squat": 40,
+            "walk": {
+              "duration": "40 minutes",
+              "steps": 5000
+            }
+          },
+          "day_6": {
+            "sit-up": 35,
+            "pull-up": 5,
+            "push-up": 30,
+            "squat": 45,
+            "walk": {
+              "duration": "45 minutes",
+              "steps": 6000
+            }
+          },
+          "day_7": {
+            "rest": "Focus on recovery and high-protein meals."  // Rest day for muscle growth
+          }
+        }
+      }
+
+
     }
+    else {
+      state.setLoading(true);
+      route.push("/plans");
+      state.setAnswer("");
+      if (state.weight === "") {
+        alert("no data");
+        return;
+      }
 
-    // constructing a prompt message with user data for OpenAI
-    const prompt = `You are given a user's data, now you gotta generate a ${state.timeDuration} ${state.selectedPlan} for that user that wants to ${state.selectedType} and has experience of ${state.exerciseExperience} in this
-        weight: ${state.weight} \n
-        height: ${state.height} \n
-        age: ${state.age} \n
-        diseases: ${state.diseases} \n
-        allergies: ${state.allergies} \n
-        diet: ${state.foodPreference}
-        need a ${state.dietType}
-        `;
+      // constructing a prompt message with user data for OpenAI
+      const prompt = `You are given a user's data, now you gotta generate a ${state.timeDuration} ${state.selectedPlan} for that user that wants to ${state.selectedType} and has experience of ${state.exerciseExperience} in this
+          weight: ${state.weight} \n
+          height: ${state.height} \n
+          age: ${state.age} \n
+          diseases: ${state.diseases} \n
+          allergies: ${state.allergies} \n
+          diet: ${state.foodPreference}
+          need a ${state.dietType}
+          `;
 
-    console.log("sending prompt to server => ", prompt);
+      console.log("sending prompt to server => ", prompt);
 
-    const results = await fetch("/api/ai", {
-      method: "POST",
-      body: JSON.stringify({
-        prompt,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
+      const results = await fetch("/api/ai", {
+        method: "POST",
+        body: JSON.stringify({
+          prompt,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => res.json());
 
-    console.log("the reponse of promts is => ", prompt);
+      console.log("the reponse of promts is => ", prompt);
 
-    
+      console.log(results);
 
-    console.log(results);
+      let newres = marked.parse(results);
+      let newnewres = newres.replace(/\n{2,}/g, '\n');
 
-    let newres = marked.parse(results);
-    let newnewres = newres.replace(/\n{2,}/g, '\n');
+      const email = "vedantsawant72003@gmail.com"
+      const subject = "Your FitGennie AI Fitness Plan"
+      const title = newnewres;
 
-    const email = "vedantsawant72003@gmail.com"
-    const subject = "Your FitGennie AI Fitness Plan"
-    const title = newnewres;
-
-
-
-    const sendmail = await fetch("/api/emailsend", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        subject,
-        title
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => res.json());
-    console.log("sendmail result is: ",sendmail);
-    // mailSender("jhas0042@gmail.com", "Your FitGennie AI Fitness Plan", results );
-    state.setAnswer(newnewres);
-    // make text out of answer
-    // state.setAnswer(results.result.choices[0].message.content);
-    state.setLoading(false);
+      const sendmail = await fetch("/api/emailsend", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          subject,
+          title
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => res.json());
+      console.log("sendmail result is: ",sendmail);
+      // mailSender("jhas0042@gmail.com", "Your FitGennie AI Fitness Plan", results );
+      state.setAnswer(newnewres);
+      // make text out of answer
+      // state.setAnswer(results.result.choices[0].message.content);
+      state.setLoading(false);
+    };
   };
 
   return (

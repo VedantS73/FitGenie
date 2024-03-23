@@ -150,12 +150,12 @@ const page: React.FC = () => {
                         </tr>
                         <tr className="bg-white dark:bg-gray-800">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <button onClick={() => executeExercise('push-up',40)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
+                              <button onClick={() => executeExercise('push-up',12)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
                                 Push-Ups
                               </button>
                             </th>
                             <td className="px-6 py-4">
-                                40
+                                12
                             </td>
                             <td className="px-6 py-4">
                             <svg className="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
