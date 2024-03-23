@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Stream</title>
+    <title>Run Main Script</title>
 </head>
 <body>
-    <h1>Video Stream from Webcam</h1>
-    <img src="{{ url_for('video_feed') }}">
+    <h1>Run Main Script</h1>
+    <form action="/run_main" method="post">
+        <label for="exercise_type">Exercise Type:</label>
+        <input type="text" id="exercise_type" name="exercise_type" value="walk" required><br><br>
+        
+        <input type="submit" value="Run Main Script">
+    </form>
 </body>
 </html>
