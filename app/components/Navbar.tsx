@@ -71,6 +71,12 @@ const Navbar: FC<NavbarProps> = ({}) => {
           </button>
         </Link>
 
+        <Link href="/Tracker">
+          <button className="hover:text-violet-700" id="home-button">
+            Activity
+          </button>
+        </Link>
+
         <Link href="/FitTips">
           <button className="hover:text-violet-700" id="home-button">
             FitTips
