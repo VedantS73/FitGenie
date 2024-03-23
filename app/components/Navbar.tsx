@@ -70,9 +70,11 @@ const Navbar: FC<NavbarProps> = ({}) => {
           </button>
         </Link>
 
-        <button id="trainer-button">
-          <a href="#trainers">Trainers</a>
-        </button>
+        <Link href="/plans">
+          <button id="trainer-button">
+            My Plans
+          </button>
+        </Link>
 
         {userDetails.email ? (
           <div className="flex items-center gap-10">

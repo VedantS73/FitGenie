@@ -40,7 +40,7 @@ const Hero = () => {
           fitness journey with{" "}
           <span className="text-violet-500 font-extrabold">Fit Genie.</span>
         </span>
-        <p className="mt-4 text-lg w-[551px] font-semibold mx-auto leading-8 text-gray-600 sm:text-center max-sm:w-[340px]">
+        <p className="mt-4 text-xl w-[551px] font-semibold mx-auto leading-8 text-gray-600 sm:text-center max-sm:w-[340px]">
           Customized workout and diet plans, powered by AI. Say goodbye to
           generic routines and hello to a virtual personal trainer that adapts
           to your progress and motivates you towards success.
@@ -48,16 +48,24 @@ const Hero = () => {
         <div className="mt-8 flex gap-x-8 sm:justify-center justify-center">
           <Link
             href={userDetails?.email ? "/form" : "/signup"}
-            className="z-10 inline-block rounded-md px-5 py-3 text-lg font-medium leading-7 border-2 text-black shadow-sm  border-violet-500  hover:border-violet-700"
+            className="z-10 inline-block rounded-md px-5 py-3 text-lg font-medium leading-7 border-2 text-white shadow-sm border-violet-500 bg-violet-500 hover:bg-white hover:text-violet-700 hover:border-violet-700 transition-colors duration-300 ease-in-out"
           >
-            Get started
-            <span className="text-black font-bold ml-2" aria-hidden="true">
+            Get Started
+            <span
+              className="text-white font-bold ml-2 transition-colors duration-300 ease-in-out"
+              aria-hidden="true"
+            >
               &rarr;
             </span>
           </Link>
         </div>
+
         <div className="flex flex-row justify-center -mt-10 max-sm:mt-2">
-          <Image src={dumbbell} className="w-[380px] max-sm:w-[300px]" alt={""}></Image>
+          <Image
+            src={dumbbell}
+            className="w-[380px] max-sm:w-[300px]"
+            alt={""}
+          ></Image>
         </div>
         <div className="flex flex-row justify-center -mt-10 hover:cursor-pointer max-sm:mt-2">
           <Image src={arrow} className="w-[50px]" alt={""}></Image>

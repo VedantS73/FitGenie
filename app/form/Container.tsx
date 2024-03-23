@@ -9,6 +9,7 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useRouter } from "next/navigation";
 import useFormOneStore from "@/store/formStore";
+import { marked } from 'marked';
 
 const Container = () => {
   const forms = [
@@ -41,7 +42,7 @@ const Container = () => {
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     state.setLoading(true);
-    route.push("/dashboard");
+    route.push("/plans");
     state.setAnswer("");
     if (state.weight === "") {
       alert("no data");
@@ -59,6 +60,8 @@ const Container = () => {
         need a ${state.dietType}
         `;
 
+    console.log("sending prompt to server => ", prompt);
+
     const results = await fetch("/api/ai", {
       method: "POST",
       body: JSON.stringify({
@@ -68,9 +71,12 @@ const Container = () => {
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());
-    console.log("the reponse of promts is => ",prompt);
+
+    console.log("the reponse of promts is => ", prompt);
     console.log(results);
-    state.setAnswer(results.result.message.content);
+    let newres = marked.parse(results);
+    let newnewres = newres.replace(/\n{2,}/g, '\n');
+    state.setAnswer(newnewres);
     // make text out of answer
     // state.setAnswer(results.result.choices[0].message.content);
     state.setLoading(false);
@@ -122,6 +128,8 @@ const Container = () => {
 
         <h1 className="text-xl mt-20 ">Track Your Progress</h1>
       </div>
+      
+      <div className="text-black max-sm:w-full" dangerouslySetInnerHTML={{ __html: state.answer }} />
     </div>
   );
 };

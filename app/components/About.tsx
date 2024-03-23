@@ -32,7 +32,7 @@ const about = () => {
         <div className="pt-36 flex flex-col justify-center gap-20 max-sm:pt-12">
           <div className="flex flex-row justify-around items-center max-sm:flex-col">
             <div className="text-content flex flex-col justify-center items-center gap-4">
-              <div className="border-2 border-violet-600 rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]  ">
+              <div className="rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]  ">
                 <Image src={fitnessIcon} className="w-[48%]" alt={""}></Image>
               </div>
               <div className="w-[400px] text-2xl font-medium max-sm:w-[300px] max-sm:text-xl">
@@ -41,7 +41,7 @@ const about = () => {
               </div>
             </div>
             <div className="text-content flex flex-col justify-center items-center gap-4 max-sm:mt-12">
-              <div className="border-2 border-violet-600 rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]">
+              <div className="rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]">
                 <Image
                   src={fitnessIconSecond}
                   className="w-[58%] mt-8"
@@ -56,7 +56,7 @@ const about = () => {
           </div>
           <div className="flex flex-row justify-around items-center max-sm:flex-col">
             <div className="text-content flex flex-col justify-center items-center gap-4">
-              <div className="border-2 border-violet-600 rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]">
+              <div className="rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]">
                 <Image
                   src={fitnessIconThird}
                   className="w-[48%]"
@@ -69,7 +69,7 @@ const about = () => {
               </div>
             </div>
             <div className="text-content flex flex-col justify-center items-center gap-4 max-sm:mt-12">
-              <div className="border-2 border-violet-600 rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]">
+              <div className="rounded-md w-[440px] h-[300px] flex justify-center items-center max-sm:w-[300px] max-sm:h-[260px]">
                 <Image
                   src={fitnessIconFour}
                   className="w-[48%]"
