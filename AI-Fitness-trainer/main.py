@@ -18,9 +18,7 @@ ap.add_argument("-vs",
                 help='Type of activity to do',
                 required=False)
 args = vars(ap.parse_args())
-                
-                
-args = vars(ap.parse_args())
+
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -77,7 +75,8 @@ with mp_pose.Pose(min_detection_confidence=0.5,
         )
 
         cv2.imshow('Video', frame)
-        if cv2.waitKey(10) & 0xFF == ord('q'):
+        key = cv2.waitKey(1)
+        if key == ord('q') or key == 27:  # 'q' or ESC key to exit
             break
 
     cap.release()
