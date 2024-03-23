@@ -7,6 +7,7 @@ import Image from "next/image";
 import { account } from "@/pages/api/appwriteConfig";
 import { useRouter, usePathname } from "next/navigation";
 
+
 interface NavbarProps {
   isLandingPage?: boolean;
 }
@@ -67,6 +68,12 @@ const Navbar: FC<NavbarProps> = ({}) => {
         <Link href="/">
           <button className="hover:text-violet-700" id="home-button">
             Home
+          </button>
+        </Link>
+
+        <Link href="/FitTips">
+          <button className="hover:text-violet-700" id="home-button">
+            FitTips
           </button>
         </Link>
 
