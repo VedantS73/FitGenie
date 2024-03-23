@@ -110,7 +110,8 @@ const exercise = [
         id: 1,
         title: 'Beginner Yoga Flow',
         description: 'A gentle and introductory yoga routine to improve flexibility and mindfulness.',
-        videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
+        imageSrc: 'https://images.everydayhealth.com/images/ehfc-5-minute-beginner-yoga-flow-phyllicia-bonanno-alt-1440x810.jpg',
+        videoSrc: 'https://www.youtube.com/watch?v=zA5oxYvIx0c', // Replace with a YouTube video link
         videoAlt: 'A person demonstrating basic yoga poses on a yoga mat',
         category: 'Yoga',
         duration: '20 minutes',
@@ -120,6 +121,7 @@ const exercise = [
         id: 2, 
         title: 'High-Intensity Interval Training (HIIT) Workout',
         description: 'A challenging workout combining bursts of exercise with brief recovery periods to boost metabolism and burn calories.',
+        imageSrc: 'https://crosstownfitness.com/wp-content/uploads/2015/05/shutterstock_166601408.jpg',
         videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
         videoAlt: 'A person performing various high-intensity exercises in a workout routine',
         category: 'Cardio',
@@ -130,7 +132,8 @@ const exercise = [
         id: 3,
         title: 'Zumba Dance Fitness Party',
         description: 'A fun and energetic dance workout that combines Latin rhythms with fitness moves.',
-        videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
+        imageSrc: 'https://m.media-amazon.com/images/I/717QOIxUwwL._AC_UF1000,1000_QL80_.jpg',
+        videoSrc: 'https://www.youtube.com/watch?v=M0uO8X3_tEA', // Replace with a YouTube video link
         videoAlt: 'A group of people dancing to Zumba music in a fitness class',
         category: 'Dance Fitness',
         duration: '45 minutes',
@@ -140,6 +143,7 @@ const exercise = [
         id: 4,
         title: 'Strength Training for Beginners',
         description: 'A basic bodyweight workout to build muscle and improve overall strength.',
+        imageSrc: 'https://www.veganricha.com/wp-content/uploads/2023/03/Gochujang-Lentils-8547.jpg',
         videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
         videoAlt: 'A person demonstrating basic bodyweight exercises like squats, lunges, and push-ups',
         category: 'Strength Training',
@@ -150,6 +154,7 @@ const exercise = [
         id: 5,
         title: 'Mindful Meditation for Stress Relief',
         description: 'A guided meditation session to help reduce stress, improve focus, and promote relaxation.',
+        imageSrc: 'https://www.veganricha.com/wp-content/uploads/2023/03/Gochujang-Lentils-8547.jpg',
         videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
         videoAlt: 'A person sitting comfortably with eyes closed, meditating',
         category: 'Mindfulness',
@@ -197,22 +202,22 @@ export default function Example() {
 
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-4 text-center sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-                <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">Best of Exerciese</h2>
+                <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">Best of Exercises</h2>
 
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    {products.map((product) => (
+                    {exercise.map((product) => (
                         <div key={product.id} className="group relative">
                             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                                 <img
                                     src={product.imageSrc}
-                                    alt={product.imageAlt}
+                                    alt={product.videoAlt}
                                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                                 />
                             </div>
                             <div className="mt-4 flex justify-between">
                                 <div>
                                     <h3 className="text-sm text-gray-700">
-                                        <a href={product.href}>
+                                        <a href={product.videoSrc}>
                                             <span aria-hidden="true" className="absolute inset-0" />
                                             {product.title}
                                         </a>
