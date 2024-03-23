@@ -1,3 +1,5 @@
+import { duration } from "@mui/material"
+
 /*
   This example requires some changes to your config:
   
@@ -143,7 +145,7 @@ const exercise = [
         id: 4,
         title: 'Strength Training for Beginners',
         description: 'A basic bodyweight workout to build muscle and improve overall strength.',
-        imageSrc: 'https://www.veganricha.com/wp-content/uploads/2023/03/Gochujang-Lentils-8547.jpg',
+        imageSrc: 'https://fitasamamabear.com/wp-content/uploads/2017/05/Beginner-tips-for-strength-training.jpg',
         videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
         videoAlt: 'A person demonstrating basic bodyweight exercises like squats, lunges, and push-ups',
         category: 'Strength Training',
@@ -154,13 +156,46 @@ const exercise = [
         id: 5,
         title: 'Mindful Meditation for Stress Relief',
         description: 'A guided meditation session to help reduce stress, improve focus, and promote relaxation.',
-        imageSrc: 'https://www.veganricha.com/wp-content/uploads/2023/03/Gochujang-Lentils-8547.jpg',
-        videoSrc: 'https://www.youtube.com/watch?v=...(replace with actual video URL)', // Replace with a YouTube video link
+        imageSrc: 'https://i.ytimg.com/vi/z6X5oEIg6Ak/maxresdefault.jpg',
+        videoSrc: 'https://www.youtube.com/watch?v=gji0qsw9O4M', // Replace with a YouTube video link
         videoAlt: 'A person sitting comfortably with eyes closed, meditating',
         category: 'Mindfulness',
         duration: '10 minutes',
         difficulty: 'Easy',
     },
+    {
+        id: 6,
+        title: 'Master the Pull-Up: Beginner to Advanced Guide',
+        description: 'A comprehensive video guide demonstrating pull-up variations for all fitness levels.',
+        imageSrc: 'https://www.cnet.com/a/img/resize/d8325eb2fcb6214a47f4e47e2979bf5473f6a91c/hub/2020/03/26/4f6edc1e-cea3-46be-ab40-a1289075fac6/gettyimages-946365984.jpg?auto=webp&fit=crop&height=900&width=1200',
+        videoSrc: 'https://www.youtube.com/watch?v=Y3ntNsIS2Q8', // Replace with a YouTube video link
+        videoAlt: 'A person demonstrating different pull-up variations on a pull-up bar',
+        category: 'Bodyweight Exercise',
+        equipment: 'Pull-up bar', // Optional field to specify equipment needed
+        duration: 'Beginner-Advanced',
+      },
+      {
+        id: 7,
+        title: 'The Perfect Push-Up: Form Tips and Modifications',
+        description: 'Learn proper push-up form and discover modification options for different fitness levels.',
+        imageSrc: 'https://www.mondaycampaigns.org/wp-content/uploads/2020/08/move-it-monday-graphic-progression-of-a-push-up.png',
+        videoSrc: 'https://www.youtube.com/watch?v=k2YnU7UFAaE', // Replace with a YouTube video link
+        videoAlt: 'A person demonstrating proper push-up form on a yoga mat',
+        category: 'Bodyweight Exercise',
+        equipment: 'Mat (optional)', // Optional field to specify equipment needed
+        duration: 'Beginner-Intermediate',
+      },
+      {
+        id: 8,
+        title: 'Squat Variations for a Stronger Lower Body',
+        description: 'Explore different squat variations to target various muscle groups in your lower body.',
+        imageSrc: 'https://hips.hearstapps.com/hmg-prod/images/squat-jump-squat-178-1653334247.jpg?crop=0.574xw:0.863xh;0.204xw,0.137xh&resize=1200:*',
+        videoSrc: 'https://www.youtube.com/watch?v=a001wyjDqC8', // Replace with a YouTube video link
+        videoAlt: 'A person demonstrating various squat variations with bodyweight and weights',
+        category: 'Bodyweight Exercise',
+        equipment: 'Weights (optional)', // Optional field to specify equipment needed
+        duration: 'Beginner-Advanced',
+      },
     // Add more items following the same structure
 ]
 
@@ -169,7 +204,7 @@ export default function Example() {
         <div>
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 pt-10 pb-4 text-center sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
-                <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">Best of Nutrition</h2>
+                <h2 className="text-4xl font-bold tracking-tight mb-2 text-gray-900">Best of Nutrition</h2>
 
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {products.map((product) => (
@@ -202,7 +237,7 @@ export default function Example() {
 
         <div className="bg-white">
             <div className="mx-auto max-w-2xl px-4 py-4 text-center sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-                <h2 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">Best of Exercises</h2>
+                <h2 className="text-4xl font-bold tracking-tight mb-2 text-gray-900">Best of Exercises</h2>
 
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                     {exercise.map((product) => (
