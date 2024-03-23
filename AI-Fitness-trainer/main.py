@@ -17,20 +17,28 @@ ap.add_argument("-vs",
                 type=str,
                 help='Type of activity to do',
                 required=False)
+ap.add_argument("-c",
+                "--counter",
+                type=int,
+                help='Number of times to do the exercise',
+                required=False)
 args = vars(ap.parse_args())
 
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
+counter_limit = args["counter"]  # number of times to do the exercise
 
-if args["video_source"] is not None:
-    cap = cv2.VideoCapture("Exercise Videos/" + args["video_source"])
-else:
-    cap = cv2.VideoCapture(0)  # webcam
 
-cap.set(3, 800)  # width
-cap.set(4, 480)  # height
+# if args["video_source"] is not None:
+#     cap = cv2.VideoCapture("Exercise Videos/" + args["video_source"])
+# else:
+#     cap = cv2.VideoCapture(0)  # webcam
+cap = cv2.VideoCapture(0)
+
+cap.set(3, 1600)  # width
+cap.set(4, 960)  # height
 
 # setup mediapipe
 with mp_pose.Pose(min_detection_confidence=0.5,
@@ -59,25 +67,35 @@ with mp_pose.Pose(min_detection_confidence=0.5,
         except:
             pass
 
-        frame = score_table(args["exercise_type"], frame, counter, status)
+        if counter >= counter_limit+1:
+            frame = cv2.putText(frame, "Exercise Completed",
+                    (200, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            frame = cv2.putText(frame, "Press 'q' to exit",
+                    (200, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.imshow('Video', frame)
+            key = cv2.waitKey(1)
+            if key == ord('q') or key == 27:  # 'q' or ESC key to exit
+                break
+        else:
+            frame = score_table(args["exercise_type"], frame, counter, status)
 
-        # render detections (for landmarks)
-        mp_drawing.draw_landmarks(
-            frame,
-            results.pose_landmarks,
-            mp_pose.POSE_CONNECTIONS,
-            mp_drawing.DrawingSpec(color=(255, 255, 255),
-                                   thickness=2,
-                                   circle_radius=2),
-            mp_drawing.DrawingSpec(color=(174, 139, 45),
-                                   thickness=2,
-                                   circle_radius=2),
-        )
+            # render detections (for landmarks)
+            mp_drawing.draw_landmarks(
+                frame,
+                results.pose_landmarks,
+                mp_pose.POSE_CONNECTIONS,
+                mp_drawing.DrawingSpec(color=(255, 255, 255),
+                                    thickness=2,
+                                    circle_radius=2),
+                mp_drawing.DrawingSpec(color=(174, 139, 45),
+                                    thickness=2,
+                                    circle_radius=2),
+            )
 
-        cv2.imshow('Video', frame)
-        key = cv2.waitKey(1)
-        if key == ord('q') or key == 27:  # 'q' or ESC key to exit
-            break
+            cv2.imshow('Video', frame)
+            key = cv2.waitKey(1)
+            if key == ord('q') or key == 27:  # 'q' or ESC key to exit
+                break
 
     cap.release()
     cv2.destroyAllWindows()
