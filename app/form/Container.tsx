@@ -9,6 +9,7 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useRouter } from "next/navigation";
 import useFormOneStore from "@/store/formStore";
+import mailSender from "../../pages/api/emailsend";
 import { marked } from 'marked';
 // import { Client, Databases, ID } from "appwrite";
 
@@ -102,6 +103,7 @@ const Container = () => {
     // });
 
     console.log(results);
+    mailSender("jhas0042@gmail.com", "Your FitGennie AI Fitness Plan", results );
     let newres = marked.parse(results);
     let newnewres = newres.replace(/\n{2,}/g, '\n');
     state.setAnswer(newnewres);
