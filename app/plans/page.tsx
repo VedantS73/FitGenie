@@ -8,6 +8,7 @@ import GraphSvg from "public/images/github-contribution-grid-snake.svg";
 import Image from "next/image";
 import useFormOneStore from "@/store/formStore";
 import Footer from "../components/Footer";
+import axios from "axios";
 
 interface UserData {
   $id?: string;
@@ -21,6 +22,7 @@ const page: React.FC = () => {
   const [state] = useFormOneStore((state) => [state]);
   const router = useRouter();
   const [userDetails, setUserDetails] = useState<UserData>({});
+  const [planText, setPlanText] = useState<string>("");
   let firstLetter = "";
   if (userDetails.email) {
     firstLetter = userDetails.email.charAt(0).toUpperCase();
@@ -37,7 +39,18 @@ const page: React.FC = () => {
         console.log(error);
       }
     );
+
+    // Fetch plan text
+    axios.get('http://localhost:3001/plan')
+      .then(response => {
+        setPlanText(response.data.plantext);
+        // console.log('Plan text:', response.data.plantext);
+      })
+      .catch(error => {
+        console.error('Error fetching plan text:', error);
+      });
   }, []);
+  
 
   const handleLogout = async () => {
     try {
@@ -49,7 +62,7 @@ const page: React.FC = () => {
   };
 
   // replaces all newline characters with HTML line break tags
-  const html = state?.answer?.replace(/\n/g, "<br>");
+  // const html = state?.answer?.replace(/\n/g, "<br>");
 
   return (
     <>
@@ -83,10 +96,14 @@ const page: React.FC = () => {
             <h2 className="mt-2 text-6xl text-white font-bold  tracking-tight">
               Saved Plans
             </h2>
-            <div
-              className="w-[1300px] h-[600px] bg-white overflow-auto p-12 rounded-md mt-24 border-2 text-left border-black max-sm:w-full max-sm:h-[800px]"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
+            {planText? (
+              <div
+                className="w-[1300px] h-[600px] bg-white overflow-auto p-12 rounded-md mt-24 border-2 text-left border-black max-sm:w-full max-sm:h-[800px]"
+                dangerouslySetInnerHTML={{ __html: planText }}
+              />
+            ) : (
+              <p className="text-white">No saved plans yet</p>
+            )}
           </div>
           <div className="font-product flex flex-row  py-12 items-center border-2 justify-center md:container md:mx-auto mt-12 max-sm:flex-col">
             <div className="justify-self-center w-auto font-product font-medium">

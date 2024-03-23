@@ -212,6 +212,34 @@ const Container = () => {
         }
         }
         console.log("results => ", results);
+
+        const createCalendarEvent = async (eventDetails:any) => {
+          try {
+              const response = await axios.post('https://v1.nocodeapi.com/bedant727/calendar/ZpKkADrRyTEflLCg/event', eventDetails);
+              console.log(response.data);
+          } catch (error) {
+              console.error('Error occurred while creating calendar event:', error);
+          }
+      };
+      
+      // Iterate over each day in the workout plan
+      for (const [day, details] of Object.entries(results.workout_plan)) {
+          const eventDetails = {
+              summary: "Workout Session Event",
+              description: "", // You can add a description if needed
+              start: {
+                  dateTime: details.dateTime,
+                  timeZone: "IST"
+              },
+              end: {
+                  dateTime: details.dateTime, // Adjust as needed
+                  timeZone: "IST"
+              }
+          };
+      
+          // Call the function to create calendar event for this day
+          await createCalendarEvent(eventDetails);
+      }
       state.setAnswer(results);
     }
     else {
@@ -252,6 +280,21 @@ const Container = () => {
 
       let newres = marked.parse(results);
       let newnewres = newres.replace(/\n{2,}/g, '\n');
+
+      const updatePlan = async (newText:any) => {
+        try {
+          const response = await axios.patch('http://localhost:3001/plan', {
+            plantext: newText
+          });
+          console.log('Plan updated successfully:', response.data);
+          return response.data;
+        } catch (error) {
+          console.error('Error updating plan:', error);
+          throw error; // Handle error as needed
+        }
+      };
+      
+      updatePlan(newnewres);
 
       const email = "vedantsawant72003@gmail.com"
       const subject = "Your FitGennie AI Fitness Plan"

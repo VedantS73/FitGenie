@@ -26,7 +26,7 @@ const StepForm1 = () => {
           required
           value={state.height}
           onChange={(e) => state.setHeight(e.target.value)}
-          label="height"
+          label="height (in cms)"
           variant="outlined"
         />
         <TextField
