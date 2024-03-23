@@ -8,6 +8,7 @@ import StepFormFour from "./stepform/StepFormFour";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useRouter } from "next/navigation";
+const axios = require('axios');
 import useFormOneStore from "@/store/formStore";
 // import mailSender from "../../pages/api/emailsend";
 import { marked } from 'marked';
@@ -47,78 +48,171 @@ const Container = () => {
 
   // sends a POST request to a openAI server with a prompt and store the result in answer state
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+    const nowdate = new Date();
+    state.setLoading(true);
+    route.push("/workout");
     e.preventDefault();
     if (state.selectedPlan === "exercise") {
-      route.push("/workout");
-      let customPlan = {
+    //   const prompt = `
+    //       You are given a user's data, now you have to generate a daily workout plan for that user that wants to massgain and has experience of in this
+    //       weight: ${state.weight}
+    //       height: ${state.height}  
+    //       age: ${state.age} 
+    //       diseases: ${state.diseases}
+    //       allergies: ${state.allergies}
+
+    //     need a work plan. you need to provide a workout plan in propper json format which can be used afterwards. the available options in workout will be : 
+    //   sit-up
+    //   pull-up
+    //   push-up
+    //   squat
+    //   walk. now each of them should be prescribed with a certain number to be completed daily. 
+
+    //   Look, now todays date is - ${nowdate.toISOString()} .
+
+    //   Now from todays days onwards, for each days 7 days straight, add the data in below json objecys and everyday the date should increment. The output should be strictly in the json objects, and date format should be strictly "dateTime":"2021-02-27T21:00:00+05:30"  and after todays date onwards. 
+
+    //   example plan is like - {
+    //   "workout_plan": {
+    //     "day_1": {
+    //     "sit-up": 20,
+    //     "pull-up": 0,
+    //     "push-up": 15,
+    //     "squat": 20,
+    //     "walk": {"duration": "30 minutes", "steps": 4000},
+    //   "dateTime": "2024-03-23T21:00:00+05:30"
+    //     },
+    //     "day_2": {
+    //     "sit-up": 25,
+    //     "pull-up": 0,
+    //     "push-up": 20,
+    //     "squat": 25,
+    //     "walk": {"duration": "30 minutes", "steps": 4000},
+    //   "dateTime": "2024-03-24T21:00:00+05:30"
+    //     },
+    //     "day_3": {
+    //     "sit-up": 25,
+    //     "pull-up": 0,
+    //     "push-up": 20,
+    //     "squat": 25,
+    //     "walk": {"duration": "30 minutes", "steps": 4000},
+    //   "dateTime": "2024-03-25T21:00:00+05:30"
+    //     },
+    //     "day_4": {
+    //     "sit-up": 30,
+    //     "pull-up": 0,
+    //     "push-up": 25,
+    //     "squat": 30,
+    //     "walk": {"duration": "40 minutes", "steps": 5000},
+    //   "dateTime": "2024-03-26T21:00:00+05:30"
+    //     },
+    //     "day_5": {
+    //     "sit-up": 30,
+    //     "pull-up": 0,
+    //     "push-up": 25,
+    //     "squat": 30,
+    //     "walk": {"duration": "40 minutes", "steps": 5000},
+    //   "dateTime": "2024-03-27T21:00:00+05:30"
+    //     },
+    //     "day_6": {
+    //     "sit-up": 35,
+    //     "pull-up": 0,
+    //     "push-up": 30,
+    //     "squat": 35,
+    //     "walk": {"duration": "45 minutes", "steps": 6000},
+    //   "dateTime": "2024-03-28T21:00:00+05:30"
+    //     },
+    //     "day_7": {
+    //     "sit-up": 35,
+    //     "pull-up": 0,
+    //     "push-up": 30,
+    //     "squat": 35,
+    //     "walk": {"duration": "45 minutes", "steps": 6000},
+    //   "dateTime": "2024-03-29T21:00:00+05:30"
+    //     }
+    //   }
+    //   }
+    //   the structure and keys and format should be exactly the same. just change the numeric values in above json, i dont wasnt anything extra after key of json. make sure each json object for each day consists of - sit-up, pull-up, push-up, squat, walk. and date.
+    //   `;
+
+    //   const results = await fetch("/api/ai", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       prompt,
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }).then((res) => res.json());
+
+    //   console.log("the reponse of promts is => ", prompt);
+
+    //   console.log(results);
+
+      state.setLoading(false);
+
+      let results = {
         "workout_plan": {
-          "day_1": {
-            "sit-up": 20,
-            "pull-up": 3,  
-            "push-up": 15,
-            "squat": 30,
-            "walk": {
-              "duration": "30 minutes",
-              "steps": 4000
-            }
-          },
-          "day_2": {
-            "sit-up": 25,
-            "pull-up": 3,
-            "push-up": 20,
-            "squat": 35,
-            "walk": {
-              "duration": "30 minutes",
-              "steps": 4000
-            }
-          },
-          "day_3": {
-            "sit-up": 25,
-            "pull-up": 3,
-            "push-up": 20,
-            "squat": 35,
-            "walk": {
-              "duration": "30 minutes",
-              "steps": 4000
-            }
-          },
-          "day_4": {
-            "sit-up": 30,
-            "pull-up": 4,
-            "push-up": 25,
-            "squat": 40,
-            "walk": {
-              "duration": "40 minutes",
-              "steps": 5000
-            }
-          },
-          "day_5": {
-            "sit-up": 30,
-            "pull-up": 4,
-            "push-up": 25,
-            "squat": 40,
-            "walk": {
-              "duration": "40 minutes",
-              "steps": 5000
-            }
-          },
-          "day_6": {
-            "sit-up": 35,
-            "pull-up": 5,
-            "push-up": 30,
-            "squat": 45,
-            "walk": {
-              "duration": "45 minutes",
-              "steps": 6000
-            }
-          },
-          "day_7": {
-            "rest": "Focus on recovery and high-protein meals."  // Rest day for muscle growth
-          }
+        "day_1": {
+        "sit-up": 20,
+        "pull-up": 0,
+        "push-up": 15,
+        "squat": 20,
+        "walk": {"duration": "30 minutes", "steps": 4000},
+        "dateTime": "2024-03-24T21:00:00+05:30"
+        },
+        "day_2": {
+        "sit-up": 25,
+        "pull-up": 0,
+        "push-up": 20,
+        "squat": 25,
+        "walk": {"duration": "30 minutes", "steps": 4000},
+        "dateTime": "2024-03-25T21:00:00+05:30"
+        },
+        "day_3": {
+        "sit-up": 25,
+        "pull-up": 0,
+        "push-up": 20,
+        "squat": 25,
+        "walk": {"duration": "30 minutes", "steps": 4000},
+        "dateTime": "2024-03-26T21:00:00+05:30"
+        },
+        "day_4": {
+        "sit-up": 30,
+        "pull-up": 0,
+        "push-up": 25,
+        "squat": 30,
+        "walk": {"duration": "40 minutes", "steps": 5000},
+        "dateTime": "2024-03-27T21:00:00+05:30"
+        },
+        "day_5": {
+        "sit-up": 30,
+        "pull-up": 0,
+        "push-up": 25,
+        "squat": 30,
+        "walk": {"duration": "40 minutes", "steps": 5000},
+        "dateTime": "2024-03-28T21:00:00+05:30"
+        },
+        "day_6": {
+        "sit-up": 35,
+        "pull-up": 0,
+        "push-up": 30,
+        "squat": 35,
+        "walk": {"duration": "45 minutes", "steps": 6000},
+        "dateTime": "2024-03-29T21:00:00+05:30"
+        },
+        "day_7": {
+        "sit-up": 35,
+        "pull-up": 0,
+        "push-up": 30,
+        "squat": 35,
+        "walk": {"duration": "45 minutes", "steps": 6000},
+        "dateTime": "2024-03-30T21:00:00+05:30"
         }
-      }
-
-
+        }
+        }
+        console.log("results => ", results);
+      state.setAnswer(results);
     }
     else {
       state.setLoading(true);

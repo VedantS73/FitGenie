@@ -8,6 +8,7 @@ import GraphSvg from "public/images/github-contribution-grid-snake.svg";
 import Image from "next/image";
 import useFormOneStore from "@/store/formStore";
 import Footer from "../components/Footer";
+import axios from "axios";
 
 interface UserData {
   $id?: string;
@@ -21,6 +22,8 @@ const page: React.FC = () => {
   const [state] = useFormOneStore((state) => [state]);
   const router = useRouter();
   const [userDetails, setUserDetails] = useState<UserData>({});
+  const [workouttPlan, setWorkouttPlan] = useState({});
+  const [workoutPlanProgress, setWorkoutPlanProgress] = useState({});
   let firstLetter = "";
   if (userDetails.email) {
     firstLetter = userDetails.email.charAt(0).toUpperCase();
@@ -37,6 +40,27 @@ const page: React.FC = () => {
         console.log(error);
       }
     );
+
+    // Fetching workout plan
+    axios.get('http://localhost:3001/workout_plan')
+      .then(response => {
+        setWorkouttPlan(response.data);
+        console.log("workout plan:",response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching workout plan:', error);
+      });
+
+    // Fetching workout plan progress
+    axios.get('http://localhost:3001/workout_plan_progress')
+      .then(response => {
+        setWorkoutPlanProgress(response.data);
+        console.log("workout plan progress:",response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching workout plan progress:', error);
+      });
+
   }, []);
 
   const handleLogout = async () => {
@@ -65,13 +89,7 @@ const page: React.FC = () => {
         })
         .catch(error => console.error(error));
     }
-
-  // replaces all newline characters with HTML line break tags
-  const html = state?.answer?.replace(/\n/g, "<br>");
-
-  const executesitup = (buttoncontent:string) => {
-
-  }
+const workoutPlan = state?.answer;
 
   return (
     <>
@@ -99,104 +117,109 @@ const page: React.FC = () => {
                 Start Workout 🏋️‍♂️
               </h2>
             </div>
-
-            
-
-            <div className="relative overflow-x-auto pt-4">
-                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            {/* HEREEEEEE */}
+            <div className="title mt- font-product flex flex-row justify-center items-center"> 
+            </div>
+            {/* IF WORKOUT PLAN IS FRESH AND NEW */}
+            {workoutPlan && (
+              <>
+                <div className="sticky top-0">
+                  <h6 className="mt-2 text-xl flex items-center text-white font-bold tracking-tight">
+                    Your Newly Generated Workout Plan
+                  </h6>
+                </div>
+                <div className="relative overflow-x-auto pt-4 max-h-80">
+                  <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs bg-gray-900 uppercase dark:text-white">
-                        <tr>
-                            <th scope="col" className="px-6 py-3">
-                                Workout Session
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Recommended / Day
-                            </th>
-                            <th scope="col" className="px-6 py-3">
-                                Status
-                            </th>
-                        </tr>
+                      <tr>
+                        <th scope="col" className="px-6 py-3">
+                          Workout Session
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                          Recommended / Day
+                        </th>
+                      </tr>
                     </thead>
                     <tbody>
-                        <tr className="bg-white dark:bg-gray-800">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <button onClick={() => executeExercise('sit-up',30)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
-                                  Sit-Ups
-                              </button>
-                            </th>
-                            <td className="px-6 py-4">
-                                30
-                            </td>
-                            <td className="px-6 py-4">
-                              <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                              </svg>
-                            </td>
+                      {Object.keys(workoutPlan.workout_plan).map((day, index) => (
+                        <tr key={index} className="bg-white dark:bg-gray-800">
+                          <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {workoutPlan.workout_plan[day]['dateTime']}
+                          </th>
+                          <td className="px-6 py-4">
+                            <p>Sit Ups : {workoutPlan.workout_plan[day]['sit-up']}</p>
+                            <p>Pull Ups : {workoutPlan.workout_plan[day]['pull-up']}</p>
+                            <p>Push Ups : {workoutPlan.workout_plan[day]['push-up']}</p>
+                            <p>Squat Ups : {workoutPlan.workout_plan[day]['squat']}</p>
+                            <p>Walks : {workoutPlan.workout_plan[day]['walk']['steps']}</p>
+                          </td>
                         </tr>
-                        <tr className="bg-white dark:bg-gray-800">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <button onClick={() => executeExercise('pull-up',20)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
-                                  Pull-Ups
-                              </button>
-                            </th>
-                            <td className="px-6 py-4">
-                                20
-                            </td>
-                            <td className="px-6 py-4">
-                            <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                            </td>
-                        </tr>
-                        <tr className="bg-white dark:bg-gray-800">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <button onClick={() => executeExercise('push-up',12)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
-                                Push-Ups
-                              </button>
-                            </th>
-                            <td className="px-6 py-4">
-                                12
-                            </td>
-                            <td className="px-6 py-4">
-                            <svg className="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                {/* DONE TICK */}
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                            </svg>
-                            </td>
-                        </tr>
-                        <tr className="bg-white dark:bg-gray-800">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <button onClick={() => executeExercise('squat-up',15)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
-                                  Squats
-                              </button>
-                            </th>
-                            <td className="px-6 py-4">
-                                15
-                            </td>
-                            <td className="px-6 py-4">
-                            <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                            </td>
-                        </tr>
-                        <tr className="bg-white dark:bg-gray-800">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                              <button onClick={() => executeExercise('pull-up',200)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
-                                  Walk
-                              </button>
-                            </th>
-                            <td className="px-6 py-4">
-                                200
-                            </td>
-                            <td className="px-6 py-4">
-                            <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                            </td>
-                        </tr>
+                      ))}
                     </tbody>
-                </table>
-            </div>
+                  </table>
+                </div>
+                </>
+              )}
+            <>
+      
+      <div className="sticky top-0">
+        <h6 className="mt-2 text-xl flex items-center text-white font-bold tracking-tight">
+          Your Workout Plan
+        </h6>
+      </div>
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs bg-gray-900 uppercase dark:text-white">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Workout Session
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Recommended / Day
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Status
+            </th>
+            <th scope="col" className="px-6 py-3">
+              &nbsp;
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(workouttPlan).map((session, index) => (
+            <tr key={index} className="bg-white dark:bg-gray-800">
+              <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {session}
+              </td>
+              <td className="px-6 py-4">
+                {typeof workouttPlan[session] === 'object' ? (
+                  <p>{workouttPlan[session].duration} {workouttPlan[session].steps}</p>
+                ) : (
+                  <p>{workouttPlan[session]}</p>
+                )}
+              </td>
+              <td className="px-6 py-4">
+              {workoutPlanProgress[session] >= 1 ? (
+                <svg className="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                  {/* DONE TICK */}
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                </svg>
+              ) : (
+                <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+              )}
+
+              </td>
+              <td>
+                <button onClick={() => executeExercise(session, workouttPlan[session])} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
+                    Start
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
 
 
             <div className="font-product flex flex-row items-center justify-center md:container md:mx-auto mt-12 max-sm:flex-col max-sm:mt-4">

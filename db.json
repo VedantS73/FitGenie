@@ -1,1 +1,18 @@
-{}
+{
+  "workout_plan": {
+    "pull-up": 0,
+    "push-up": 15,
+    "sit-up": 20,
+    "squat": 20,
+    "walk": 4000
+  },
+  "workout_plan_progress": {
+    "workout_plan_progress": {
+      "pull-up": 35,
+      "push-up": 0,
+      "sit-up": 0,
+      "squat": 0,
+      "walk": 0
+    }
+  }
+}

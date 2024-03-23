@@ -4,7 +4,18 @@ from utils import *
 import mediapipe as mp
 from body_part_angle import BodyPartAngle
 from types_of_exercise import TypeOfExercise
+import requests
 
+url = 'http://localhost:3001/workout_plan_progress'
+data = {
+    "workout_plan_progress": {
+        "pull-up": 0,
+        "push-up": 0,
+        "sit-up": 0,
+        "squat": 0,
+        "walk": 0
+    }
+}
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-t",
@@ -68,6 +79,15 @@ with mp_pose.Pose(min_detection_confidence=0.5,
             pass
 
         if counter >= counter_limit+1:
+            data["workout_plan_progress"][args["exercise_type"]] += 1
+            response = requests.put(url, json=data)
+
+            # Check if the request was successful (status code 200)
+            if response.status_code == 200:
+                print("Workout plan progress updated successfully.")
+            else:
+                print("Failed to update workout plan progress:", response.text)
+
             frame = cv2.putText(frame, "Exercise Completed",
                     (200, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
             frame = cv2.putText(frame, "Press 'q' to exit",
