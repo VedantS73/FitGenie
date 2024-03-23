@@ -48,8 +48,8 @@ const page: React.FC = () => {
     }
   };
 
-    function executeExercise(exerciseType:string) {
-        fetch(`http://127.0.0.1:5000/run_main/${exerciseType}`, {
+    function executeExercise(exerciseType:string, counter_limit:number) {
+        fetch(`http://127.0.0.1:5000/run_main/${exerciseType}/${counter_limit}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -100,29 +100,128 @@ const page: React.FC = () => {
               </h2>
             </div>
 
+            
+
+            <div className="relative overflow-x-auto pt-4">
+                <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs bg-gray-900 uppercase dark:text-white">
+                        <tr>
+                            <th scope="col" className="px-6 py-3">
+                                Workout Session
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Recommended / Day
+                            </th>
+                            <th scope="col" className="px-6 py-3">
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="bg-white dark:bg-gray-800">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <button onClick={() => executeExercise('sit-up',30)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
+                                  Sit-Ups
+                              </button>
+                            </th>
+                            <td className="px-6 py-4">
+                                30
+                            </td>
+                            <td className="px-6 py-4">
+                              <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                              </svg>
+                            </td>
+                        </tr>
+                        <tr className="bg-white dark:bg-gray-800">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <button onClick={() => executeExercise('pull-up',20)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
+                                  Pull-Ups
+                              </button>
+                            </th>
+                            <td className="px-6 py-4">
+                                20
+                            </td>
+                            <td className="px-6 py-4">
+                            <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            </td>
+                        </tr>
+                        <tr className="bg-white dark:bg-gray-800">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <button onClick={() => executeExercise('push-up',40)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
+                                Push-Ups
+                              </button>
+                            </th>
+                            <td className="px-6 py-4">
+                                40
+                            </td>
+                            <td className="px-6 py-4">
+                            <svg className="w-3 h-3 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                {/* DONE TICK */}
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                            </svg>
+                            </td>
+                        </tr>
+                        <tr className="bg-white dark:bg-gray-800">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <button onClick={() => executeExercise('squat-up',15)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
+                                  Squats
+                              </button>
+                            </th>
+                            <td className="px-6 py-4">
+                                15
+                            </td>
+                            <td className="px-6 py-4">
+                            <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            </td>
+                        </tr>
+                        <tr className="bg-white dark:bg-gray-800">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              <button onClick={() => executeExercise('pull-up',200)} className=" px-6 py-3 font-semibold rounded-full bg-white text-black mx-3 hover:scale-105 transition-all">
+                                  Walk
+                              </button>
+                            </th>
+                            <td className="px-6 py-4">
+                                200
+                            </td>
+                            <td className="px-6 py-4">
+                            <svg className="w-3 h-3 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
             <div className="font-product flex flex-row items-center justify-center md:container md:mx-auto mt-12 max-sm:flex-col max-sm:mt-4">
               <div className="justify-self-center w-auto font-product font-medium">
-                <button onClick={() => executeExercise('sit-up')} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
+                <button onClick={() => executeExercise('sit-up',30)} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
                     sit-up
                 </button>
               </div>
               <div className="justify-self-center w-auto font-product font-medium">
-                <button onClick={() => executeExercise('pull-up')} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
+                <button onClick={() => executeExercise('pull-up',20)} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
                     pull-up
                 </button>
               </div>
               <div className="justify-self-center w-auto font-product font-medium">
-                <button onClick={() => executeExercise('push-up')} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
+                <button onClick={() => executeExercise('push-up',40)} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
                     push-up
                 </button>
               </div>
               <div className="justify-self-center w-auto font-product font-medium">
-                <button onClick={() => executeExercise('squat')} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
+                <button onClick={() => executeExercise('squat',15)} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
                     squat
                 </button>
               </div>
               <div className="justify-self-center w-auto font-product font-medium">
-                <button onClick={() => executeExercise('walk')} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
+                <button onClick={() => executeExercise('walk',200)} className=" px-6 py-3 font-semibold rounded-full bg-black text-white mx-3 mt-7 hover:scale-105 transition-all">
                     walk
                 </button>
               </div>

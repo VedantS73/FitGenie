@@ -71,9 +71,9 @@ const page: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="form bg-violet-500 text-white  shadow-lg py-24 rounded-full mt-12 w-[50%] md:mx-auto px-12 border">
+          <div className="form bg-violet-500 text-white shadow-lg py-8 rounded-full mt-12 w-[40%] md:mx-auto px-12 border">
             <div className="title mt- font-product flex flex-row justify-center items-center">
-              <h2 className="mt-2 text-6xl text-white  font-bold tracking-tight">
+              <h2 className="mt-2 text-4xl text-white  font-bold tracking-tight">
                 My Plans
               </h2>
             </div>

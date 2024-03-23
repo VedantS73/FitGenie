@@ -9,7 +9,7 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useRouter } from "next/navigation";
 import useFormOneStore from "@/store/formStore";
-import mailSender from "../../pages/api/emailsend";
+// import mailSender from "../../pages/api/emailsend";
 import { marked } from 'marked';
 // import { Client, Databases, ID } from "appwrite";
 
@@ -103,9 +103,26 @@ const Container = () => {
     // });
 
     console.log(results);
-    mailSender("jhas0042@gmail.com", "Your FitGennie AI Fitness Plan", results );
+
     let newres = marked.parse(results);
     let newnewres = newres.replace(/\n{2,}/g, '\n');
+
+    const email = "vedantsawant72003@gmail.com"
+    const subject = "Your FitGennie AI Fitness Plan"
+    const title = newnewres;
+    const sendmail = await fetch("/api/emailsend", {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        subject,
+        title
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+    console.log("sendmail result is: ",sendmail);
+    // mailSender("jhas0042@gmail.com", "Your FitGennie AI Fitness Plan", results );
     state.setAnswer(newnewres);
     // make text out of answer
     // state.setAnswer(results.result.choices[0].message.content);
