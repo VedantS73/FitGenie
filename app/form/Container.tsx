@@ -178,7 +178,7 @@ const Container = () => {
         "workout_plan": {
         "day_1": {
         "sit-up": 20,
-        "pull-up": 0,
+        "pull-up": 10,
         "push-up": 15,
         "squat": 20,
         "walk": {"duration": "30 minutes", "steps": 4000},
@@ -186,7 +186,7 @@ const Container = () => {
         },
         "day_2": {
         "sit-up": 25,
-        "pull-up": 0,
+        "pull-up": 8,
         "push-up": 20,
         "squat": 25,
         "walk": {"duration": "30 minutes", "steps": 4000},
@@ -194,7 +194,7 @@ const Container = () => {
         },
         "day_3": {
         "sit-up": 25,
-        "pull-up": 0,
+        "pull-up": 10,
         "push-up": 20,
         "squat": 25,
         "walk": {"duration": "30 minutes", "steps": 4000},
@@ -202,7 +202,7 @@ const Container = () => {
         },
         "day_4": {
         "sit-up": 30,
-        "pull-up": 0,
+        "pull-up": 8,
         "push-up": 25,
         "squat": 30,
         "walk": {"duration": "40 minutes", "steps": 5000},
@@ -210,7 +210,7 @@ const Container = () => {
         },
         "day_5": {
         "sit-up": 30,
-        "pull-up": 0,
+        "pull-up": 10,
         "push-up": 25,
         "squat": 30,
         "walk": {"duration": "40 minutes", "steps": 5000},
@@ -218,7 +218,7 @@ const Container = () => {
         },
         "day_6": {
         "sit-up": 35,
-        "pull-up": 0,
+        "pull-up": 8,
         "push-up": 30,
         "squat": 35,
         "walk": {"duration": "45 minutes", "steps": 6000},
@@ -226,7 +226,7 @@ const Container = () => {
         },
         "day_7": {
         "sit-up": 35,
-        "pull-up": 0,
+        "pull-up": 10,
         "push-up": 30,
         "squat": 35,
         "walk": {"duration": "45 minutes", "steps": 6000},
