@@ -1,6 +1,6 @@
 "use client";
 
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent } from "react";
 import StepFormOne from "./stepform/StepFormOne";
 import StepFormTwo from "./stepform/StepFormTwo";
 import StepFormThree from "./stepform/StepFormThree";
@@ -13,13 +13,36 @@ import useFormOneStore from "@/store/formStore";
 // import mailSender from "../../pages/api/emailsend";
 import { marked } from 'marked';
 import { Client, Databases, ID } from "appwrite";
+import { account } from "@/pages/api/appwriteConfig";
+import { useEffect, useState } from "react";
+;
 
-const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject(`65fdbf643f997e6ea8f1`);
 
+interface UserData {
+  $id?: string;
+  name?: string;
+  email?: string;
+  emailVerification?: boolean;
+  charAt?: string;
+}
 
 const Container = () => {
+  const [userDetails, setUserDetails] = useState<UserData>({});
+
+  // fetching user data
+  useEffect(() => {
+    const getData = account.get();
+    getData.then(
+      function (response: any) {
+        console.log("Email Response Appwrite",response);
+        setUserDetails(response);
+      },
+      function (error: any) {
+        console.log(error);
+      }
+    );
+  }, []);
+
   const forms = [
     <StepFormOne key="stepFormOne" />,
     <StepFormTwo key="stepFormTwo" />,
@@ -296,7 +319,7 @@ const Container = () => {
       
       updatePlan(newnewres);
 
-      const email = "vedantsawant72003@gmail.com"
+      const email = userDetails.email;
       const subject = "Your FitGennie AI Fitness Plan"
       const title = newnewres;
 
