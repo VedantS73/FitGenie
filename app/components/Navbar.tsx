@@ -89,6 +89,12 @@ const Navbar: FC<NavbarProps> = ({}) => {
           </button>
         </Link>
 
+        <Link href="/NutritionAdvisor">
+          <button id="trainer-button">
+            Nutrition Advisor
+          </button>
+        </Link>
+
         <Link href="/plans">
           <button id="trainer-button">
             My Plans
