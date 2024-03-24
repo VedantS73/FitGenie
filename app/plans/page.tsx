@@ -92,13 +92,13 @@ const page: React.FC = () => {
             </div>
           </div>
           
-          <div className="plans-section bg-violet-500 mt-24 py-24 font-product flex flex-col justify-center items-center">
+          <div className="plans-section bg-violet-500 mt-8 pb-24 pt-10 font-product flex flex-col justify-center items-center">
             <h2 className="mt-2 text-6xl text-white font-bold  tracking-tight">
               Saved Plans
             </h2>
             {planText? (
               <div
-                className="w-[1300px] h-[600px] bg-white overflow-auto p-12 rounded-md mt-24 border-2 text-left border-black max-sm:w-full max-sm:h-[800px]"
+              className="w-[1300px] h-[600px] bg-white overflow-auto p-12 rounded-md mt-24 border-2 border-black shadow-md hover:shadow-xl max-sm:w-full max-sm:h-[800px] transition duration-300 ease-in-out"
                 dangerouslySetInnerHTML={{ __html: planText }}
               />
             ) : (
