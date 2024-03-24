@@ -1,5 +1,7 @@
 # FitGenie
 
+![FitGenie Cover](cover.png)
+
 FitGenie is an AI-powered fitness application designed to revolutionize your fitness journey. From personalized workout plans to smart nutrition recommendations, FitGenie is your ultimate fitness companion.
 
 ## Features
